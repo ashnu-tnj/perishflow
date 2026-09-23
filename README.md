@@ -22,7 +22,7 @@ npm run lint     # TypeScript check
 | `app/globals.css` | Design tokens (`@theme`) and shared component classes |
 | `components/TelemetryPreview.tsx` | Scripted, clearly-labelled *simulated* reefer console in the hero (pausable, honours reduced motion, stops offscreen) |
 | `components/CommoditySelector.tsx` | Accessible tabs with indicative carriage profiles per commodity |
-| `components/ContactForm.tsx` | Labelled form with on-blur validation; opens a pre-filled email to `hello@perishflow.aflatus.com` |
+| `components/ContactForm.tsx` | Labelled form with on-blur validation; opens a pre-filled email to `info@aflatus.com` |
 | `design-system/perishflow/MASTER.md` | Design system generated with the UI/UX Pro Max skill |
 
 ## Design system

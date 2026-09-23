@@ -3,7 +3,7 @@
 import { CheckCircle2, Send } from "lucide-react";
 import { useState } from "react";
 
-export const CONTACT_EMAIL = "hello@perishflow.aflatus.com";
+export const CONTACT_EMAIL = "info@aflatus.com";
 
 const roles = [
   "Investor",
