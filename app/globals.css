@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+/* Design tokens — see design-system/perishflow/MASTER.md */
+@theme {
+  --color-bg: #0b1120;
+  --color-surface: #111a2e;
+  --color-card: #16213a;
+  --color-muted: #1e2a44;
+  --color-line: #2a3754;
+  --color-fg: #f8fafc;
+  --color-fg-muted: #a3b1c6;
+  --color-fresh: #22c55e;
+  --color-fresh-strong: #16a34a;
+  --color-ice: #38bdf8;
+  --color-warn: #f59e0b;
+  --color-risk: #ef4444;
+
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    color-scheme: dark;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+  p { text-wrap: pretty; }
+  :focus-visible {
+    outline: 2px solid var(--color-fresh);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  button, a, select, [role="tab"] { cursor: pointer; }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) { .container-page { padding-inline: 1.5rem; } }
+
+  .glass {
+    background: color-mix(in oklab, var(--color-card) 70%, transparent);
+    border: 1px solid color-mix(in oklab, white 10%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-fresh);
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    min-height: 44px; padding: 0.625rem 1.25rem; border-radius: 9999px;
+    background: var(--color-fresh); color: #052e16; font-weight: 600;
+    transition: background-color 200ms ease, transform 200ms ease;
+  }
+  .btn-primary:hover { background: #4ade80; }
+  .btn-primary:active { transform: scale(0.98); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    min-height: 44px; padding: 0.625rem 1.25rem; border-radius: 9999px;
+    border: 1px solid var(--color-line); color: var(--color-fg); font-weight: 500;
+    transition: border-color 200ms ease, background-color 200ms ease;
+  }
+  .btn-ghost:hover { border-color: var(--color-fg-muted); background: var(--color-muted); }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, white 5%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, white 5%, transparent) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%);
+  }
+}
+
+/* Scroll reveal: only hidden once JS has marked the page ready, so no-JS users see everything */
+.js-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 450ms cubic-bezier(0.22, 1, 0.36, 1), transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--reveal-i, 0) * 60ms);
+}
+.js-ready [data-reveal].is-visible { opacity: 1; transform: none; }
+
+@keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+.pulse-dot { animation: pulse-dot 1.6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js-ready [data-reveal] { opacity: 1; transform: none; }
+}
