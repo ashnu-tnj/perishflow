@@ -138,7 +138,7 @@ export function CommoditySelector() {
               aria-controls={`panel-${item.id}`}
               tabIndex={selected ? 0 : -1}
               onClick={() => setActive(i)}
-              className={`min-h-11 shrink-0 whitespace-nowrap rounded-full border px-4 py-2 text-left text-sm transition-colors duration-200 lg:rounded-xl ${
+              className={`min-h-11 shrink-0 whitespace-nowrap rounded-[2px] border px-4 py-2 text-left text-sm transition-colors duration-200  ${
                 selected
                   ? "border-fresh bg-fresh/10 text-fg"
                   : "border-line text-fg-muted hover:border-fg-muted hover:text-fg"
@@ -155,7 +155,7 @@ export function CommoditySelector() {
         id={`panel-${c.id}`}
         aria-labelledby={`tab-${c.id}`}
         tabIndex={0}
-        className="rounded-3xl border border-line bg-card p-6 sm:p-8"
+        className="rounded-[3px] border border-line bg-card p-6 sm:p-8"
       >
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <h3 className="text-2xl font-semibold">{c.name}</h3>
@@ -163,15 +163,15 @@ export function CommoditySelector() {
         </div>
 
         <dl className="mt-6 grid gap-3 sm:grid-cols-3">
-          <div className="rounded-2xl bg-bg/60 p-4">
+          <div className="rounded-[3px] bg-bg/60 p-4">
             <dt className="text-xs text-fg-muted">Temperature band</dt>
             <dd className="mt-1 font-mono text-lg text-ice">{c.band}</dd>
           </div>
-          <div className="rounded-2xl bg-bg/60 p-4">
+          <div className="rounded-[3px] bg-bg/60 p-4">
             <dt className="text-xs text-fg-muted">Relative humidity</dt>
             <dd className="mt-1 font-mono text-lg">{c.rh}</dd>
           </div>
-          <div className="rounded-2xl bg-bg/60 p-4">
+          <div className="rounded-[3px] bg-bg/60 p-4">
             <dt className="text-xs text-fg-muted">Ethylene profile</dt>
             <dd className="mt-1 text-base">{c.ethylene}</dd>
           </div>
@@ -186,14 +186,14 @@ export function CommoditySelector() {
           {c.priorities.map((p, i) => (
             <li
               key={p}
-              className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 text-sm"
+              className="inline-flex items-center gap-2 rounded-[2px] border border-line px-3 py-1.5 text-sm"
             >
               <span className="font-mono text-xs text-fresh">{String(i + 1).padStart(2, "0")}</span>
               {p}
             </li>
           ))}
           {c.chilling && (
-            <li className="inline-flex items-center rounded-full border border-warn/40 bg-warn/10 px-3 py-1.5 text-sm text-warn">
+            <li className="inline-flex items-center rounded-[2px] border border-warn/40 bg-warn/10 px-3 py-1.5 text-sm text-warn">
               Chilling-sensitive
             </li>
           )}

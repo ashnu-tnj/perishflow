@@ -98,17 +98,25 @@ export function TelemetryPreview() {
   const riskLabel = f.risk >= 55 ? "Elevated" : f.risk >= 30 ? "Watch" : "Nominal";
 
   return (
-    <div ref={ref} className="glass relative rounded-3xl p-4 shadow-2xl shadow-black/40 sm:p-5">
+    <div
+      ref={ref}
+      className="relative rounded-[3px] border-2 border-[#3a4554] bg-[#12171e] p-4 pt-7 shadow-2xl shadow-black/50 sm:p-5 sm:pt-8"
+    >
+      {/* reefer machinery grille */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-3 bg-[repeating-linear-gradient(90deg,#2a323d_0_6px,#12171e_6px_9px)]"
+      />
       {/* header */}
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-fg-muted">
             Reefer MSKU-40R · Mango · Day 9 of 14
           </p>
-          <p className="mt-1 font-display text-base font-semibold">Cargo condition console</p>
+          <p className="mt-1 font-display text-lg font-bold uppercase tracking-wide">Cargo condition console</p>
         </div>
         <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-line px-2.5 py-1 font-mono text-[11px] text-fg-muted">
+          <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-[2px] border border-line px-2.5 py-1 font-mono text-[11px] text-fg-muted">
             <span className={`h-1.5 w-1.5 rounded-full bg-ice ${running ? "pulse-dot" : ""}`} aria-hidden />
             Simulated data
           </span>
@@ -116,7 +124,7 @@ export function TelemetryPreview() {
             <button
               type="button"
               onClick={() => setPaused((p) => !p)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-fg-muted transition-colors duration-200 hover:bg-muted hover:text-fg"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-[2px] border border-line text-fg-muted transition-colors duration-200 hover:bg-muted hover:text-fg"
               aria-label={paused ? "Resume simulation" : "Pause simulation"}
             >
               {paused ? <Play size={16} aria-hidden /> : <Pause size={16} aria-hidden />}
@@ -126,7 +134,7 @@ export function TelemetryPreview() {
       </div>
 
       {/* container heat map */}
-      <div className="mt-4 rounded-2xl border border-line bg-bg/60 p-3">
+      <div className="mt-4 rounded-[3px] border border-line bg-bg/60 p-3">
         <div className="mb-2 flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-fg-muted">
           <span>Front · reefer unit</span>
           <span>Doors</span>
@@ -137,7 +145,7 @@ export function TelemetryPreview() {
             return (
               <div
                 key={z}
-                className={`flex h-14 flex-col justify-between rounded-lg px-2 py-1.5 transition-colors duration-700 ${zoneColor(d)}`}
+                className={`flex h-14 flex-col justify-between rounded-[2px] px-2 py-1.5 transition-colors duration-700 ${zoneColor(d)}`}
               >
                 <span className="font-mono text-[10px] opacity-80">{z}</span>
                 <span className="font-mono text-sm tabular-nums">{f.temps[z].toFixed(1)}°</span>
@@ -157,7 +165,7 @@ export function TelemetryPreview() {
           { k: "CO₂", v: `${f.co2.toFixed(2)}%` },
           { k: "Ethylene", v: `${f.ethylene.toFixed(2)} ppm` },
         ].map((r) => (
-          <div key={r.k} className="rounded-xl border border-line bg-bg/40 px-3 py-2">
+          <div key={r.k} className="rounded-[3px] border border-line bg-bg/40 px-3 py-2">
             <dt className="text-[11px] text-fg-muted">{r.k}</dt>
             <dd className="font-mono text-sm tabular-nums">{r.v}</dd>
           </div>
@@ -165,7 +173,7 @@ export function TelemetryPreview() {
       </dl>
 
       {/* risk */}
-      <div className="mt-3 rounded-xl border border-line bg-bg/40 px-3 py-2.5">
+      <div className="mt-3 rounded-[3px] border border-line bg-bg/40 px-3 py-2.5">
         <div className="flex items-center justify-between text-[11px]">
           <span className="text-fg-muted">Predicted shelf-life risk</span>
           <span className="font-mono tabular-nums">

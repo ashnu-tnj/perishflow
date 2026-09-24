@@ -56,7 +56,7 @@ export function ContactForm() {
 
   if (sent) {
     return (
-      <div role="status" className="rounded-3xl border border-fresh/40 bg-fresh/10 p-8">
+      <div role="status" className="rounded-[3px] border border-fresh/40 bg-fresh/10 p-8">
         <CheckCircle2 className="text-fresh" size={28} aria-hidden />
         <h3 className="mt-4 text-xl font-semibold">Your email is ready to send</h3>
         <p className="mt-2 text-fg-muted">
@@ -74,11 +74,11 @@ export function ContactForm() {
   }
 
   const field =
-    "mt-1.5 block w-full min-h-11 rounded-xl border bg-bg/60 px-4 py-2.5 text-base text-fg placeholder:text-fg-muted/60 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-fresh/60";
+    "mt-1.5 block w-full min-h-11 rounded-[3px] border bg-bg/60 px-4 py-2.5 text-base text-fg placeholder:text-fg-muted/60 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-fresh/60";
   const border = (k: keyof Fields) => (show(k) ? "border-risk" : "border-line hover:border-fg-muted");
 
   return (
-    <form noValidate onSubmit={onSubmit} className="rounded-3xl border border-line bg-card p-6 sm:p-8">
+    <form noValidate onSubmit={onSubmit} className="rounded-[3px] border border-line bg-card p-6 sm:p-8">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="f-name" className="text-sm font-medium">
@@ -177,9 +177,9 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
         <p className="text-sm text-fg-muted">Opens your email app with the details filled in.</p>
-        <button type="submit" className="btn-primary">
+        <button type="submit" className="btn-primary whitespace-nowrap">
           <Send size={16} aria-hidden /> Request a conversation
         </button>
       </div>

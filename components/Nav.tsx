@@ -49,7 +49,7 @@ export function Nav() {
             <li key={l.href}>
               <a
                 href={l.href}
-                className="rounded-full px-3 py-2 text-sm text-fg-muted transition-colors duration-200 hover:text-fg"
+                className="rounded-[2px] px-3 py-2 text-sm text-fg-muted transition-colors duration-200 hover:text-fg"
               >
                 {l.label}
               </a>
@@ -82,7 +82,7 @@ export function Nav() {
                 <a
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-lg px-3 py-3 text-base text-fg-muted hover:bg-muted hover:text-fg"
+                  className="block rounded-[2px] px-3 py-3 text-base text-fg-muted hover:bg-muted hover:text-fg"
                 >
                   {l.label}
                 </a>
