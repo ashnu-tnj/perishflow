@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow, Barlow_Condensed, JetBrains_Mono, Saira_Stencil } from "next/font/google";
 import { RevealObserver } from "@/components/Reveal";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const display = Barlow_Condensed({
@@ -14,7 +15,8 @@ const stencil = Saira_Stencil({ subsets: ["latin"], weight: "600", variable: "--
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mono", display: "swap" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://perishflow.aflatus.com"),
+  metadataBase: new URL(SITE_URL),
+  alternates: { canonical: "/" },
   title: "PerishFlow AI — Cold chain that knows what's inside",
   description:
     "AI-powered cargo environment management for refrigerated containers. PerishFlow senses, understands, predicts and acts on the condition of perishable cargo in transit.",
@@ -23,6 +25,8 @@ export const metadata: Metadata = {
     description:
       "Sense → Understand → Predict → Act. Active, cargo-aware environment control for reefer containers.",
     type: "website",
+    url: "/",
+    siteName: "PerishFlow AI",
   },
 };
 

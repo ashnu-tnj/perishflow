@@ -10,7 +10,7 @@ Built with Next.js 16 (App Router, static export), React 19, Tailwind CSS v4 and
 ```bash
 npm install
 npm run dev      # http://localhost:3000
-npm run build    # static site in ./out — deploy anywhere (Vercel, Netlify, S3, GitHub Pages)
+npm run build    # static site in ./out
 npm run lint     # TypeScript check
 ```
 
@@ -37,3 +37,24 @@ reefer-white, with safety-yellow actions. Type: Barlow Condensed (display), Barl
 (markings), JetBrains Mono (telemetry).
 
 The contact form has no backend — swap the `mailto:` in `ContactForm.tsx` for Formspree, Resend or an API route when ready.
+
+## Domain & deployment
+
+Live at **https://www.perishflow.com** (domain registered at BigRock, site served from the Hostinger VPS
+`srv1047573` / `72.60.203.152`). The canonical URL lives in `lib/site.ts`.
+
+| Host | Behaviour |
+|------|-----------|
+| `www.perishflow.com` | Serves the site |
+| `perishflow.com` | 301 → `https://www.perishflow.com` |
+| `perishflow.aflatus.com` | 301 → `https://www.perishflow.com` (old address) |
+
+**DNS (BigRock → Manage DNS):** `A @ → 72.60.203.152`, `CNAME www → perishflow.com`; delete the default
+`127.0.0.1` records.
+
+**Server:** nginx config and setup steps are in `deploy/nginx-perishflow.conf`. To deploy:
+
+```bash
+npm run build
+rsync -av --delete out/ root@72.60.203.152:/var/www/perishflow/
+```
