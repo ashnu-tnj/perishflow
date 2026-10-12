@@ -40,8 +40,9 @@ The contact form has no backend — swap the `mailto:` in `ContactForm.tsx` for 
 
 ## Domain & deployment
 
-Live at **https://www.perishflow.com** (domain registered at BigRock, site served from the Hostinger VPS
-`srv1047573` / `72.60.203.152`). The canonical URL lives in `lib/site.ts`.
+Live at **https://www.perishflow.com**. Domain registered at BigRock; site runs as the `perishflow` Docker
+Compose project on the Hostinger VPS `srv1047573` (`72.60.203.152`), behind the Traefik proxy from the `n8n`
+project, which issues Let's Encrypt certificates automatically. The canonical URL lives in `lib/site.ts`.
 
 | Host | Behaviour |
 |------|-----------|
@@ -49,12 +50,7 @@ Live at **https://www.perishflow.com** (domain registered at BigRock, site serve
 | `perishflow.com` | 301 → `https://www.perishflow.com` |
 | `perishflow.aflatus.com` | 301 → `https://www.perishflow.com` (old address) |
 
-**DNS (BigRock → Manage DNS):** `A @ → 72.60.203.152`, `CNAME www → perishflow.com`; delete the default
-`127.0.0.1` records.
+**DNS (BigRock):** `A @ → 72.60.203.152`, `CNAME www → perishflow.com`.
 
-**Server:** nginx config and setup steps are in `deploy/nginx-perishflow.conf`. To deploy:
-
-```bash
-npm run build
-rsync -av --delete out/ root@72.60.203.152:/var/www/perishflow/
-```
+**Deploy:** the container builds from this repo's default branch (`deploy/docker-compose.yml` mirrors the
+project on the VPS). After merging, open Hostinger → VPS → Docker Manager → `perishflow` → **Update** to rebuild.
