@@ -52,5 +52,7 @@ project, which issues Let's Encrypt certificates automatically. The canonical UR
 
 **DNS (BigRock):** `A @ → 72.60.203.152`, `CNAME www → perishflow.com`.
 
-**Deploy:** the container builds from this repo's default branch (`deploy/docker-compose.yml` mirrors the
-project on the VPS). After merging, open Hostinger → VPS → Docker Manager → `perishflow` → **Update** to rebuild.
+**Deploy:** every push to `claude/main` runs `.github/workflows/publish-image.yml`, which builds the
+`Dockerfile` and pushes `ghcr.io/ashnu-tnj/perishflow:latest`. Then redeploy the `perishflow` project
+(Hostinger → VPS → Docker Manager → Update, compose file in `deploy/docker-compose.yml`) to pull it.
+Hostinger's deploy only pulls images, it never builds them, which is why the image is built in CI.

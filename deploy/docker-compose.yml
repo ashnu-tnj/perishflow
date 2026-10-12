@@ -3,24 +3,11 @@
 #   www.perishflow.com                        → this container
 #   perishflow.com, perishflow.aflatus.com    → 301 https://www.perishflow.com/…
 # Plain HTTP is redirected to HTTPS globally by Traefik's "web" entrypoint.
-# Builds from the repo's default branch on every deploy (pull_policy: build), so redeploying ships new commits.
+# GitHub Actions publishes the image on every push to claude/main; redeploying pulls the latest one.
 services:
   perishflow:
-    build:
-      context: https://github.com/ashnu-tnj/perishflow.git
-      dockerfile_inline: |
-        FROM node:22-alpine AS build
-        WORKDIR /app
-        COPY package.json package-lock.json ./
-        RUN npm ci --no-audit --no-fund
-        COPY . .
-        RUN npm run build
-
-        FROM nginx:1.27-alpine
-        COPY --from=build /app/out /usr/share/nginx/html
-        EXPOSE 80
-    image: perishflow:latest
-    pull_policy: build   # always rebuild from GitHub on deploy; there is no registry image to pull
+    image: ghcr.io/ashnu-tnj/perishflow:latest   # built by .github/workflows/publish-image.yml
+    pull_policy: always
     container_name: perishflow
     restart: unless-stopped
     networks:
