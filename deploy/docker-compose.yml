@@ -1,0 +1,56 @@
+# Production compose for the Hostinger VPS (srv1047573, project "perishflow").
+# Traefik from the n8n project terminates TLS (Let's Encrypt TLS challenge) and routes by host:
+#   www.perishflow.com                        → this container
+#   perishflow.com, perishflow.aflatus.com    → 301 https://www.perishflow.com/…
+# Plain HTTP is redirected to HTTPS globally by Traefik's "web" entrypoint.
+# Builds from the repo's default branch; redeploy (Hostinger Docker manager → Update) to ship new commits.
+services:
+  perishflow:
+    build:
+      context: https://github.com/ashnu-tnj/perishflow.git
+      dockerfile_inline: |
+        FROM node:22-alpine AS build
+        WORKDIR /app
+        COPY package.json package-lock.json ./
+        RUN npm ci --no-audit --no-fund
+        COPY . .
+        RUN npm run build
+
+        FROM nginx:1.27-alpine
+        COPY --from=build /app/out /usr/share/nginx/html
+        EXPOSE 80
+    image: perishflow:latest
+    container_name: perishflow
+    restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=n8n_default"
+      - "traefik.http.services.perishflow.loadbalancer.server.port=80"
+
+      # Canonical site
+      - "traefik.http.routers.perishflow.rule=Host(`www.perishflow.com`)"
+      - "traefik.http.routers.perishflow.entrypoints=websecure"
+      - "traefik.http.routers.perishflow.tls=true"
+      - "traefik.http.routers.perishflow.tls.certresolver=mytlschallenge"
+      - "traefik.http.routers.perishflow.service=perishflow"
+      - "traefik.http.routers.perishflow.middlewares=perishflow-sec@docker"
+      - "traefik.http.middlewares.perishflow-sec.headers.stsSeconds=31536000"
+      - "traefik.http.middlewares.perishflow-sec.headers.forceSTSHeader=true"
+
+      # Apex + old subdomain → www (permanent)
+      - "traefik.http.routers.perishflow-redirect.rule=Host(`perishflow.com`) || Host(`perishflow.aflatus.com`)"
+      - "traefik.http.routers.perishflow-redirect.entrypoints=websecure"
+      - "traefik.http.routers.perishflow-redirect.tls=true"
+      - "traefik.http.routers.perishflow-redirect.tls.certresolver=mytlschallenge"
+      - "traefik.http.routers.perishflow-redirect.service=perishflow"
+      - "traefik.http.routers.perishflow-redirect.middlewares=perishflow-to-www@docker"
+      - "traefik.http.middlewares.perishflow-to-www.redirectregex.regex=^https?://[^/]+/?(.*)"
+      - "traefik.http.middlewares.perishflow-to-www.redirectregex.replacement=https://www.perishflow.com/$${1}"
+      - "traefik.http.middlewares.perishflow-to-www.redirectregex.permanent=true"
+
+networks:
+  traefik:
+    external: true
+    name: n8n_default
