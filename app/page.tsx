@@ -432,7 +432,7 @@ export default function Home() {
         <div className="container-page flex flex-col items-start justify-between gap-6 py-10 text-sm text-fg-muted sm:flex-row sm:items-center">
           <div className="flex items-center gap-2.5">
             <Logo size={26} />
-            <span>© {new Date().getFullYear()} PerishFlow AI</span>
+            <span>© {new Date().getFullYear()} PerishFlow</span>
           </div>
           <nav aria-label="Footer">
             <ul className="flex flex-wrap gap-x-5 gap-y-2 font-display text-base uppercase tracking-wide">
@@ -442,6 +442,15 @@ export default function Home() {
               <li><a className="hover:text-fg" href="#contact">Contact</a></li>
             </ul>
           </nav>
+        </div>
+        <div className="border-t border-line">
+          <p className="container-page py-5 text-xs leading-relaxed text-fg-muted">
+            PerishFlow is a part of Aflatus (OPC) Private Limited
+            <span aria-hidden> · </span>
+            <span className="whitespace-nowrap">CIN U46301TN2025OPC184784</span>
+            <span aria-hidden> · </span>
+            Registered office: Chennai, Tamil Nadu, India
+          </p>
         </div>
       </footer>
     </>

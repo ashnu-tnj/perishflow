@@ -17,16 +17,16 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mo
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: "/" },
-  title: "PerishFlow AI — Cold chain that knows what's inside",
+  title: "PerishFlow — Cold chain that knows what's inside",
   description:
     "AI-powered cargo environment management for refrigerated containers. PerishFlow senses, understands, predicts and acts on the condition of perishable cargo in transit.",
   openGraph: {
-    title: "PerishFlow AI — Cold chain that knows what's inside",
+    title: "PerishFlow — Cold chain that knows what's inside",
     description:
       "Sense → Understand → Predict → Act. Active, cargo-aware environment control for reefer containers.",
     type: "website",
     url: "/",
-    siteName: "PerishFlow AI",
+    siteName: "PerishFlow",
   },
 };
 
