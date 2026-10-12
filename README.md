@@ -1,6 +1,6 @@
-# PerishFlow AI — landing page
+# PerishFlow — landing page
 
-Marketing site for **PerishFlow AI**, AI-powered cargo environment management for refrigerated containers
+Marketing site for **PerishFlow**, AI-powered cargo environment management for refrigerated containers
 (Sense → Understand → Predict → Act).
 
 Built with Next.js 16 (App Router, static export), React 19, Tailwind CSS v4 and Lucide icons.

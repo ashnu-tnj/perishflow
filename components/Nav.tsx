@@ -37,10 +37,10 @@ export function Nav() {
       }`}
     >
       <nav aria-label="Primary" className="container-page flex h-16 items-center justify-between gap-6">
-        <a href="#top" className="flex items-center gap-2.5" aria-label="PerishFlow AI home">
+        <a href="#top" className="flex items-center gap-2.5" aria-label="PerishFlow home">
           <Logo />
           <span className="font-display text-lg font-semibold tracking-tight">
-            PerishFlow<span className="text-fresh"> AI</span>
+            PerishFlow
           </span>
         </a>
 
