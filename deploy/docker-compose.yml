@@ -3,7 +3,7 @@
 #   www.perishflow.com                        → this container
 #   perishflow.com, perishflow.aflatus.com    → 301 https://www.perishflow.com/…
 # Plain HTTP is redirected to HTTPS globally by Traefik's "web" entrypoint.
-# Builds from the repo's default branch; redeploy (Hostinger Docker manager → Update) to ship new commits.
+# Builds from the repo's default branch on every deploy (pull_policy: build), so redeploying ships new commits.
 services:
   perishflow:
     build:
@@ -20,6 +20,7 @@ services:
         COPY --from=build /app/out /usr/share/nginx/html
         EXPOSE 80
     image: perishflow:latest
+    pull_policy: build   # always rebuild from GitHub on deploy; there is no registry image to pull
     container_name: perishflow
     restart: unless-stopped
     networks:
