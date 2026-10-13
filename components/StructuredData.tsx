@@ -1,4 +1,4 @@
-import { COMPANY, CONTACT_EMAIL, SITE_NAME, SITE_URL, SUMMARY, TEAM, commodities } from "@/lib/content";
+import { COMPANY, CONTACT_EMAIL, SITE_NAME, SITE_URL, FOUNDER, SUMMARY, commodities } from "@/lib/content";
 
 /** schema.org JSON-LD describing the organisation, its parent company and the site. */
 export function StructuredData() {
@@ -23,7 +23,7 @@ export function StructuredData() {
           "Ethylene control",
           ...commodities.map((c) => c.name),
         ],
-        member: { "@type": "Person", name: TEAM.name, sameAs: [TEAM.f6s] },
+        founder: { "@type": "Person", name: FOUNDER.name, sameAs: [FOUNDER.f6s] },
         parentOrganization: {
           "@type": "Organization",
           legalName: COMPANY.legalName,

@@ -25,7 +25,7 @@ export const COMPANY = {
   country: "IN",
 } as const;
 
-export const TEAM = {
+export const FOUNDER = {
   name: "Mohamed Ashfaaq Kalifulla",
   f6s: "https://www.f6s.com/member/mohamed-kalifulla",
 } as const;
