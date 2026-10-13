@@ -433,6 +433,23 @@ export default function Home() {
           <div className="flex items-center gap-2.5">
             <Logo size={26} />
             <span>© {new Date().getFullYear()} PerishFlow</span>
+            <a
+              href="https://www.f6s.com/member/mohamed-kalifulla?follow=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Follow Mohamed Ashfaaq Kalifulla on F6S"
+              className="ml-2 inline-flex"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element -- third-party badge, served as-is */}
+              <img
+                src="https://www.f6s.com/images/f6s-follow-secondary.png"
+                width={78}
+                height={22}
+                alt="Follow Mohamed Ashfaaq Kalifulla on F6S"
+                loading="lazy"
+                style={{ width: 78, height: 22 }}
+              />
+            </a>
           </div>
           <nav aria-label="Footer">
             <ul className="flex flex-wrap gap-x-5 gap-y-2 font-display text-base uppercase tracking-wide">
