@@ -18,7 +18,8 @@ import {
   Wind,
 } from "lucide-react";
 import { CommoditySelector } from "@/components/CommoditySelector";
-import { CONTACT_EMAIL, ContactForm } from "@/components/ContactForm";
+import { ContactForm } from "@/components/ContactForm";
+import { COMPANY, CONTACT_EMAIL, comparison, problems, revenue, roadmap, steps } from "@/lib/content";
 import { Container } from "@/components/Container";
 import { ContainerStack } from "@/components/ContainerStack";
 import { Logo } from "@/components/Logo";
@@ -37,78 +38,9 @@ function SectionHeader({ eyebrow, title, lead, id }: { eyebrow: string; title: s
   );
 }
 
-const steps = [
-  {
-    icon: Radar,
-    name: "Sense",
-    paint: "navy",
-    body: "Distributed probes across multiple cargo zones — not one return-air sensor — capture the real environment around the fruit.",
-    tags: ["Temperature", "Humidity", "CO₂", "O₂", "Ethylene", "Airflow", "Shock"],
-  },
-  {
-    icon: BrainCircuit,
-    name: "Understand",
-    paint: "rust",
-    body: "Raw readings are interpreted in context: what the cargo is, when it was harvested, and how long it still has to travel.",
-    tags: ["Produce type", "Harvest date", "Voyage duration"],
-  },
-  {
-    icon: TrendingUp,
-    name: "Predict",
-    paint: "steel",
-    body: "Models estimate shelf-life risk, ripening acceleration, hotspots and condensation before any damage is visible.",
-    tags: ["Shelf-life risk", "Ripening", "Hotspots", "Condensation"],
-  },
-  {
-    icon: SlidersHorizontal,
-    name: "Act",
-    paint: "green",
-    body: "Control modules respond to the prediction — then PerishFlow measures whether the response actually worked.",
-    tags: ["Air circulation", "Humidity", "Ethylene filtration", "CO₂ management"],
-  },
-] as const;
-
-const comparison = [
-  ["Knows its set temperature", true, true],
-  ["Measures conditions in every cargo zone", false, true],
-  ["Tracks ethylene, CO₂ and O₂ around the produce", false, true],
-  ["Understands what the cargo is and how old it is", false, true],
-  ["Predicts deterioration before it is visible", false, true],
-  ["Acts on a specific zone and verifies the result", false, true],
-] as const;
-
-const revenue = [
-  { icon: Cpu, name: "Hardware", body: "Sensing and control modules, sold or leased per container." },
-  { icon: Ship, name: "Per-shipment analytics", body: "AI condition monitoring priced per voyage." },
-  { icon: Gauge, name: "Dashboard subscriptions", body: "Live and historical views for exporters and importers." },
-  { icon: Layers, name: "Fleet analytics", body: "Enterprise insight across lanes, vessels and seasons." },
-  { icon: FileBarChart, name: "Cargo-condition reports", body: "Evidence for claims, insurers and quality disputes." },
-  { icon: Plug, name: "Platform APIs", body: "Condition data piped into TMS, ERP and trading systems." },
-];
-
-const roadmap = [
-  {
-    phase: "01",
-    name: "Sensing & baseline data",
-    body: "Build the multi-zone sensing infrastructure and create baseline datasets from real shipments.",
-    current: true,
-  },
-  {
-    phase: "02",
-    name: "Predictive models",
-    body: "Train deterioration and shelf-life models on commodity-specific data.",
-  },
-  {
-    phase: "03",
-    name: "Active control",
-    body: "Integrate airflow, humidity, ethylene and atmosphere control with closed-loop verification.",
-  },
-  {
-    phase: "04",
-    name: "Commercial scale",
-    body: "Scale with shipping lines, exporters and logistics partners across key trade lanes.",
-  },
-];
+const problemPoints = problems.map((p, i) => ({ ...p, icon: [Thermometer, Wind, Activity][i] }));
+const stepsWithIcons = steps.map((s, i) => ({ ...s, icon: [Radar, BrainCircuit, TrendingUp, SlidersHorizontal][i] }));
+const revenueWithIcons = revenue.map((r, i) => ({ ...r, icon: [Cpu, Ship, Gauge, Layers, FileBarChart, Plug][i] }));
 
 /** Spacing between stacked "containers" leaves room for the corner castings. */
 const SECTION = "container-page py-10 sm:py-14";
@@ -175,23 +107,7 @@ export default function Home() {
             />
 
             <div className="mt-12 grid gap-4 md:grid-cols-3">
-              {[
-                {
-                  icon: Thermometer,
-                  title: "One sensor, one number",
-                  body: "Conventional reefers control on return-air temperature. Hotspots near the doors or deep in the stow go unseen.",
-                },
-                {
-                  icon: Wind,
-                  title: "Invisible chemistry",
-                  body: "Ethylene build-up and shifting CO₂ / O₂ accelerate ripening long before a single piece of fruit looks different.",
-                },
-                {
-                  icon: Activity,
-                  title: "Found too late",
-                  body: "Without a record of cargo condition, damage surfaces at discharge — and becomes a dispute instead of a decision.",
-                },
-              ].map((c) => (
+              {problemPoints.map((c) => (
                 <article key={c.title} className="plate p-6">
                   <span className="inline-flex h-11 w-11 items-center justify-center bg-muted text-ice">
                     <c.icon size={20} aria-hidden />
@@ -229,7 +145,7 @@ export default function Home() {
           </div>
 
           <ol className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-            {steps.map((s, i) => (
+            {stepsWithIcons.map((s, i) => (
               <li key={s.name} data-reveal style={{ ["--reveal-i" as string]: i }} className="flex">
                 <Container paint={s.paint} className="flex w-full flex-col p-6">
                   <div className="flex items-start justify-between">
@@ -317,7 +233,7 @@ export default function Home() {
               lead="Built for exporters, shipping lines, logistics operators and importers — with revenue that compounds as the fleet and dataset grow."
             />
             <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {revenue.map((r) => (
+              {revenueWithIcons.map((r) => (
                 <li key={r.name} className="plate flex gap-4 p-5">
                   <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center bg-black/30 text-safety">
                     <r.icon size={20} aria-hidden />
@@ -462,11 +378,11 @@ export default function Home() {
         </div>
         <div className="border-t border-line">
           <p className="container-page py-5 text-xs leading-relaxed text-fg-muted">
-            PerishFlow is a part of Aflatus (OPC) Private Limited
+            PerishFlow is a part of {COMPANY.legalName}
             <span aria-hidden> · </span>
-            <span className="whitespace-nowrap">CIN U46301TN2025OPC184784</span>
+            <span className="whitespace-nowrap">CIN {COMPANY.cin}</span>
             <span aria-hidden> · </span>
-            Registered office: Chennai, Tamil Nadu, India
+            Registered office: {COMPANY.registeredOffice}
           </p>
         </div>
       </footer>

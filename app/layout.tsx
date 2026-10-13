@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow, Barlow_Condensed, JetBrains_Mono, Saira_Stencil } from "next/font/google";
 import { RevealObserver } from "@/components/Reveal";
+import { StructuredData } from "@/components/StructuredData";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -16,7 +17,11 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains-mo
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    // Plain-text summaries for AI assistants (https://llmstxt.org)
+    types: { "text/plain": [{ url: "/llms.txt", title: "LLM-friendly summary" }] },
+  },
   title: "PerishFlow — Cold chain that knows what's inside",
   description:
     "AI-powered cargo environment management for refrigerated containers. PerishFlow senses, understands, predicts and acts on the condition of perishable cargo in transit.",
@@ -44,6 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         {children}
         <RevealObserver />
+        <StructuredData />
       </body>
     </html>
   );
