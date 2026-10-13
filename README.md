@@ -18,6 +18,7 @@ npm run lint     # TypeScript check
 
 | Path | What |
 |------|------|
+| `lib/content.ts` | All site copy and data (single source for the page, `llms.txt` and structured data) |
 | `app/page.tsx` | All page sections: hero (container yard), problem, system, commodities, business model, roadmap, contact |
 | `components/Container.tsx` | Shipping-container shell (corrugation, corner castings, ISO 6346 marking with real check digit) |
 | `components/ContainerStack.tsx` | Decorative port skyline with stacked containers and a gantry crane |
@@ -37,6 +38,13 @@ reefer-white, with safety-yellow actions. Type: Barlow Condensed (display), Barl
 (markings), JetBrains Mono (telemetry).
 
 The contact form has no backend — swap the `mailto:` in `ContactForm.tsx` for Formspree, Resend or an API route when ready.
+
+## AI & search visibility
+
+- `robots.txt` explicitly allows AI crawlers and assistants (GPTBot, ChatGPT-User, ClaudeBot, Claude-User, Google-Extended, PerplexityBot, Applebot, …).
+- `/llms.txt` and `/llms-full.txt` ([llmstxt.org](https://llmstxt.org)) give AI assistants a clean Markdown summary and the full site text, generated from `lib/content.ts` (`lib/llms.ts`).
+- JSON-LD (`components/StructuredData.tsx`) describes PerishFlow and its parent company, Aflatus (OPC) Private Limited.
+- All commodity profiles are in the static HTML (inactive tabs use `hidden`), so crawlers that don't run JavaScript still see them.
 
 ## Domain & deployment
 
