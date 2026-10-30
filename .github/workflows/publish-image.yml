@@ -1,7 +1,8 @@
 name: Publish image
 
 # Builds the site image and pushes it to GHCR. The VPS pulls
-# ghcr.io/ashnu-tnj/perishflow:latest (see deploy/docker-compose.yml).
+# ghcr.io/ashnu-tnj/perishflow:latest (see deploy/docker-compose.yml). The Oracle
+# server (arm64) checks for a new :latest every 5 minutes and redeploys it.
 on:
   push:
     branches: [claude/main]
@@ -33,6 +34,7 @@ jobs:
         with:
           context: .
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             ghcr.io/ashnu-tnj/perishflow:latest
             ghcr.io/ashnu-tnj/perishflow:${{ github.sha }}
